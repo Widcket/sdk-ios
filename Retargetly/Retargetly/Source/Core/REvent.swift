@@ -63,7 +63,7 @@ internal struct REvent {
                 REventParam.mf.rawValue : manager.mf,
                 REventParam.device.rawValue : manager.device,
                 REventParam.lan.rawValue : manager.language ?? "",
-                REventParam.uid.rawValue : manager.uid
+                REventParam.uid.rawValue : manager.uid ?? ""
         ]
         
         if let value = self.value {
