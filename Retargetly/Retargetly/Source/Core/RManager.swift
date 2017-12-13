@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import CoreLocation
 import AdSupport
 // MARK: - Swizzling implementation for UIViewController classes
@@ -26,13 +27,13 @@ private let swizzlingUIViewController: (UIViewController.Type) -> () = { viewCon
 // MARK: - Swizzling implementation for CLLocationManager classes
 
 private let swizzlingCLLocationManager: (CLLocationManager.Type) -> () = { locationManager in
-
+    
     let originalSelector = #selector(locationManager.startUpdatingLocation)
     let swizzledSelector = #selector(locationManager.ret_startUpdatingLocation)
-
+    
     let originalMethod = class_getInstanceMethod(locationManager, originalSelector)
     let swizzledMethod = class_getInstanceMethod(locationManager, swizzledSelector)
-
+    
     method_exchangeImplementations(originalMethod, swizzledMethod)
 }
 
@@ -64,7 +65,7 @@ fileprivate enum EndpointParam: String {
  Events Manager, allows to track events.
  
  Manages an singleton property named 'default' for its use
-*/
+ */
 public class RManager {
     
     // MARK: - Instance Members
@@ -149,7 +150,7 @@ public class RManager {
     /**
      Function that tracks an event, with specific params.
      Uses conection to an endpoint
-    */
+     */
     public func track(value: JSON?, callback: callbackWithError? = nil) {
         RManager.default.track(et: .custom, value: value, callback: callback)
     }
